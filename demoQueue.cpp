@@ -68,6 +68,10 @@ public:
             return rear - front + 1;
         return size - front + rear + 1;
     }
+  bool empty(){
+        if(front==-1 && rear==-1) return true;
+        return false;
+    }
 };
 
 int main() {
