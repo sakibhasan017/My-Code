@@ -5,35 +5,45 @@ using namespace std;
 const int M=1e9+7;
 const int N=2e5+7;
 
-struct Node{
-
- Node *previous,*next;
- int data;
+struct Node {
+    int data;
+    Node* next,*previous;
 };
 
+void print(Node* i) {
+    Node* curr = i;
+    while (curr != NULL) {
+        cout << curr->data << " ";
+        curr = curr->previous;
+    }
+    cout << endl;
+}
+
 int main() {
-   Node *head=new Node;
-   Node *tail=new Node;
-   head->previous=NULL;
-   Node *Hsave=head;
-   Hsave->previous=NULL;
-   int n;
-   cin>>n;
-   for(int i=0;i<n;i++){
-     int x;
-     cin>>x;
-     Node *newNode=new Node;
-     newNode->data=x;
-     newNode->previous=Hsave;
-     newNode->next=NULL;
-     Hsave->next=newNode;
-     Hsave=newNode;
+    Node* head = NULL;
+    Node* tail = NULL;
+    int n;
+    cin >> n;
 
-   }
-   Node *i;
-   for(i=Hsave;i->previous!=NULL;i=i->previous){
-      cout<<i->data<<" ";
-   }
-   cout<<endl;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        Node* newNode = new Node;
+        newNode->data = x;
+        newNode->next = NULL;
 
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+            newNode->previous = NULL;
+        } else {
+            tail->next = newNode;
+            newNode->previous = tail;
+            tail = newNode;
+        }
+    }
+
+    print(tail);
+
+    return 0;
 }
