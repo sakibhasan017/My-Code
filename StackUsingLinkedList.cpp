@@ -32,11 +32,22 @@ class stackUL{
         size++;
    }
 
-   void pop(){
-    tail=tail->previous;
-    tail->next=NULL;
-    size--;
-   }
+   void pop() {
+        if (tail == NULL) {
+            cout << "Stack is empty."<<endl;
+            return;
+        }
+        if (tail == head) {
+            delete tail;
+            head = NULL;
+            tail = NULL;
+        } else {
+            tail = tail->previous;
+            delete tail->next;
+            tail->next = NULL;
+        }
+        size--;
+    }
 
    void printForward(){
       Node *i;
@@ -55,7 +66,11 @@ class stackUL{
    }
 
    void top(){
-    cout<<tail->data<<endl;
+    if (tail == NULL) {
+            cout << "Stack is empty."<<endl;;
+            return;
+        }
+        cout << tail->data << endl;
    }
 
    void length(){
