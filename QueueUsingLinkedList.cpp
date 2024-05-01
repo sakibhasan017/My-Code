@@ -1,0 +1,102 @@
+
+#include<bits/stdc++.h>
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ll long long
+using namespace std;
+
+struct Node{
+  Node *previous,*next;
+  int data;
+};
+
+class QueueUL{
+  public:
+   Node *head=NULL;
+   Node *tail=NULL;
+   
+   int size;
+    
+   void push(int n){
+      Node *newNode=new Node;
+      newNode->data=n;
+      newNode->next=NULL;
+      if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+            newNode->previous = NULL;
+        } else {
+            tail->next = newNode;
+            newNode->previous = tail;
+            tail = newNode;
+        }
+        size++;
+   }
+
+   void pop() {
+    if (head == NULL) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+    Node *temp = head;
+    head = head->next;
+    if (head != NULL) {
+        head->previous = NULL;
+    } else {
+        tail = NULL;
+    }
+    delete temp;
+    size--;
+}
+
+
+   void printForward(){
+      Node *i;
+      for(i=head;i !=  NULL;i=i->next){
+        cout<<i->data<<" ";
+      }
+      cout<<endl;
+   }
+
+    void printBackward(){
+      Node *i;
+      for(i=tail;i !=  NULL;i=i->previous){
+        cout<<i->data<<" ";
+      }
+      cout<<endl;
+   }
+
+   void top(){
+    if (head == NULL) {
+            cout << "Stack is empty."<<endl;;
+            return;
+        }
+        cout << head->data << endl;
+   }
+
+   void length(){
+    cout<<size<<endl;
+   }
+
+
+};
+
+int main() {
+    fast;
+    QueueUL st;
+    int n,x;
+    cin>>n;
+    for(int i=0;i<n;i++){
+     cin>>x;
+     st.push(x);
+    }
+
+    st.printForward();
+    st.printBackward();
+    st.pop();
+    st.pop();
+
+    st.printForward();
+    st.top();
+    st.length();
+  
+}
