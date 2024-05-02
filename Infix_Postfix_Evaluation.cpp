@@ -125,7 +125,11 @@ else{
         j++;
        }
        i+=c;
-       st.push(stoi(temp));
+       int cal=0;
+       for(int i=0;i<temp.length();i++){
+        cal=cal*10+temp[i]-'0';
+       }
+       st.push(cal);
      }
    }
 
